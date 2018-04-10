@@ -8,7 +8,7 @@
     </parent>
 
     <artifactId>testng-plugin</artifactId>
-    <version>1.13</version>
+    <version>1.13-resultswhenaborted</version>
     <packaging>hpi</packaging>
     <name>TestNG Results Plugin</name>
 

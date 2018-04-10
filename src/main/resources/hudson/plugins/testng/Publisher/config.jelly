@@ -16,6 +16,9 @@
       <f:entry title="Mark build as failure on failed configuration?" field="failureOnFailedTestConfig">
          <f:checkbox name="testng.failureOnFailedTestConfig" default="false" />
       </f:entry>
+      <f:entry title="Look for results even when build is aborted?" field="resultsWhenAborted">
+         <f:checkbox name="testng.resultsWhenAborted" default="false" />
+      </f:entry>
       <f:section title="Thresholds to mark build Unstable">
       <f:entry title="Skipped Tests" field="unstableSkips">
          <f:textbox default="100"/>

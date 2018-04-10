@@ -39,6 +39,8 @@ public class Publisher extends Recorder {
    public final boolean escapeExceptionMsg;
    //failed config mark build as failure
    public final boolean failureOnFailedTestConfig;
+   //look for results even when build is aborted
+   public final boolean resultsWhenAborted;
    //should failed builds be included in graphs or not
    public final boolean showFailedBuilds;
    //v1.11 - marked transient and here just for backward compatibility
@@ -60,13 +62,14 @@ public class Publisher extends Recorder {
 
    @DataBoundConstructor
    public Publisher(String reportFilenamePattern, boolean escapeTestDescp, boolean escapeExceptionMsg,
-                    boolean showFailedBuilds, boolean failureOnFailedTestConfig,
+                    boolean showFailedBuilds, boolean failureOnFailedTestConfig, boolean resultsWhenAborted,
                     int unstableSkips, int unstableFails, int failedSkips, int failedFails, int thresholdMode) {
       this.reportFilenamePattern = reportFilenamePattern;
       this.escapeTestDescp = escapeTestDescp;
       this.escapeExceptionMsg = escapeExceptionMsg;
       this.showFailedBuilds = showFailedBuilds;
       this.failureOnFailedTestConfig = failureOnFailedTestConfig;
+      this.resultsWhenAborted = resultsWhenAborted;
       this.unstableSkips = unstableSkips;
       this.unstableFails = unstableFails;
       this.failedSkips = failedSkips;
@@ -105,7 +108,7 @@ public class Publisher extends Recorder {
 
       PrintStream logger = listener.getLogger();
 
-      if (build.getResult().equals(Result.ABORTED)) {
+      if (build.getResult().equals(Result.ABORTED) && !resultsWhenAborted) {
          logger.println("Build Aborted. Not looking for any TestNG results.");
          return true;
       }
